@@ -20,12 +20,19 @@ pipeline {
                     }
                     stage('Run') {
                         //
+                        bat nohub gradlew bootRun &
+                        Sleep 20
                     }
                     stage('Rest') {
                         //
+                        bat "curl -X GET 'http://localhost:8888/rest/mscovid/test?msg=testing'"
                     }
                     stage('Nexus') {
                         //
+                         steps {
+                 // logica para subir un artefacto a nexus
+                             nexusPublisher nexusInstanceId: 'nexus', nexusRepositoryId: 'test-nexus', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: 'jar', filePath: 'C:\\Users\\Luis Garrido\\Desktop\\Devops\\ejemplo-maven\\ejemplo-maven\\build\\libs\\DevOpsUsach2020-0.0.1.jar']], mavenCoordinate: [artifactId: 'spring-boot-starter-parent', groupId: 'org.springframework.boot', packaging: 'jar', version: '0.0.1']]]
+                         }
                     }
                     
                 }
@@ -34,5 +41,11 @@ pipeline {
     }
 }
 
+ stage('uploadNexus'){
+             steps {
+                 // logica para subir un artefacto a nexus
+                 nexusPublisher nexusInstanceId: 'nexus', nexusRepositoryId: 'test-nexus', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: 'jar', filePath: 'C:\\Users\\Luis Garrido\\Desktop\\Devops\\ejemplo-maven\\ejemplo-maven\\build\\DevOpsUsach2020-0.0.1.jar']], mavenCoordinate: [artifactId: 'spring-boot-starter-parent', groupId: 'org.springframework.boot', packaging: 'jar', version: '0.0.1']]]
+             }
+        }
 
 
