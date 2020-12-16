@@ -20,7 +20,7 @@ pipeline {
                     }
                     stage('Run') {
                         //
-                        bat "bash gradle bootRun &"
+                        bat "gradlew bootRun &"
                         Sleep 20
                     }
                     stage('Rest') {
