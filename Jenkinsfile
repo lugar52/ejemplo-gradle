@@ -20,12 +20,12 @@ pipeline {
                     }
                     stage('Run') {
                         //
-                        bat "nohup bash gradlew bootRun &"
+                        bat "nohup start gradlew bootRun &"
                         Sleep 20
                     }
                     stage('Rest') {
                         //
-                        bat "curl -X GET 'http://localhost:8888/rest/mscovid/test?msg=testing'"
+                        bat "curl -X GET 'http://localhost:8898/rest/mscovid/test?msg=testing'"
                     }
                     stage('Nexus') {
                         //
