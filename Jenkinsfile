@@ -21,7 +21,7 @@ pipeline {
                     stage('Run') {
                         //
                         "start gradlew bootRun &"
-                        Sleep 20
+                        
                     }
                     stage('Rest') {
                         //
