@@ -20,7 +20,7 @@ pipeline
                     {
                         def ejecucion = load 'maven.groovy'
                     }
-                    ejecucion.call()"                 
+                    ejecucion.call()                 
                 }
             }
         }
