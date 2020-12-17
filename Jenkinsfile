@@ -8,7 +8,7 @@ pipeline {
             steps {
                 script {
 
-                    def ejecucion = (rarams.herramientas == 'gradle') ? load 'gradle.groovy' : load 'maven.groovy'
+                    def ejecucion = (params.herramientas == 'gradle') ? load 'gradle.groovy' : load 'maven.groovy'
 
                 }
             }
