@@ -2,7 +2,7 @@ pipeline
 {
     agent any
 
-    parameters { choice(name: 'herramientas', choices: ['gradle', 'maven'], description: '') }
+    parameters { choice(name: 'tool', choices: ['gradle', 'maven'], description: '') }
 
     stages 
     {
@@ -13,7 +13,7 @@ pipeline
                 script 
                 {
 
-                    def ejecucion = (params.herramientas == 'gradle') ? load 'gradle.groovy' : load 'maven.groovy'
+                    def ejecucion = (params.tool == 'gradle') ? load gradle.groovy : load maven.groovy
 
                 }
             }
