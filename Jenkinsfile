@@ -12,8 +12,15 @@ pipeline
             {
                 script 
                 {
-
-                    def ejecucion = (params.tool == 'gradle') ? load gradle.groovy : load maven.groovy
+                    
+                    if (params.tool == 'gradle') 
+                    {
+                        def ejecucion = load 'gradle.groovy'
+                    } else 
+                    {
+                        def ejecucion = load 'maven.groovy'
+                    }
+                    
 
                 }
             }
