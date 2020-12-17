@@ -2,6 +2,7 @@ pipeline {
     agent any
 
     parameters { choice(name: 'herramientas', choices: ['gradle', 'maven'], description: '') }
+    
     stages {
         stage('Pipeline'){
             steps {
