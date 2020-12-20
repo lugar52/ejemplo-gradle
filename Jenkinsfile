@@ -27,7 +27,7 @@ pipeline
 
         success {
                     script {
-                env.SUMMARY = "'[Luis Garrido] ${env.JOB_NAME} [${params.herramientas}] [Ejecucion exitosa]'"
+                env.SUMMARY = "'[Luis Garrido] ${env.JOB_NAME} [${params.herramientas}] Ejecucion exitosa'"
         }
                 println "Este es el mensaje " + env.SUMMARY
                 
