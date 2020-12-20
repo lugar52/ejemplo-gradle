@@ -15,7 +15,7 @@ pipeline
                 {
                     println 'Herramientas de ejecucion seleccionadas: ' + params.herramientas
                     def NAMETOOLS = params.herramientas
-
+                    def subject = "${NAMETOOLS}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
 
                     def pipe = load "${params.herramientas}.groovy"
                     pipe.call()
@@ -30,7 +30,7 @@ pipeline
                     
 
                     // Default values
-            def subject = "${NAMETOOLS}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
+            
             
             slackSend(teamDomain: 'luisgarrido', tokenCredentialId: 'Slack_tokens', message: summary)
             //slackSend message: '[LUIS GARRIDO][' ${env.JOB_NAME}  '][Ejecucion Exitosa]', teamDomain: 'luisgarrido', tokenCredentialId: 'Slack_tokens'
