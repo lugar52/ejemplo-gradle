@@ -3,7 +3,7 @@ pipeline
     agent any
 
     parameters { choice(name: 'herramientas', choices: ['gradle', 'maven'], description: '') }
-    def env.NAMETOOLS
+    
     env.NAMETOOLS = params.herramientas
     stages 
     {
