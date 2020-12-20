@@ -14,7 +14,6 @@ pipeline
                 script 
                 {
                     println 'Herramientas de ejecucion seleccionadas: ' + params.herramientas
-                    //def NAMETOOLS = params.herramientas
                     env.SUMMARY = "'[Luis Garrido] ${env.JOB_NAME} [${params.herramientas}] [Ejecucion exitosa]'"
 
                     def pipe = load "${params.herramientas}.groovy"
@@ -26,18 +25,15 @@ pipeline
     post {
         success {
             println "Este es el mensaje " + env.SUMMARY
-
+            env.SUMMARY = "${env.SUMMARY} Ejecucion exitosa'"
             slackSend(teamDomain: 'luisgarrido', tokenCredentialId: 'Slack_tokens', message: env.SUMMARY)
-            //slackSend message: '[LUIS GARRIDO][' ${env.JOB_NAME}  '][Ejecucion Exitosa]', teamDomain: 'luisgarrido', tokenCredentialId: 'Slack_tokens'
         }
 
         failure {
             println env.TAREA
             println "Este es el mensaje " + env.SUMMARY
-            //println NAMETOOLS
+            env.SUMMARY = "${env.SUMMARY} Ejecución fallida en stage [${env.TAREA}] '"
             slackSend(teamDomain: 'luisgarrido', tokenCredentialId: 'Slack_tokens', message: env.SUMMARY)
-            //slackSend message: '[LUIS GARRIDO][env.JOB_NAME] [NAMETOOLS] [Ejecución fallida en][env.TAREA]', teamDomain: 'luisgarrido', tokenCredentialId: 'Slack_tokens'
-
         }
     }
 }
