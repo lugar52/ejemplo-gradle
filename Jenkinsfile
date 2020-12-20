@@ -24,13 +24,13 @@ pipeline
     post {
         success {
             println env.TAREA
-            slackSend message: '[LUIS GARRIDO][env.JOB_NAME]${NAMETOOLS}[Ejecución Exitosa]', teamDomain: 'luisgarrido', tokenCredentialId: 'Slack_tokens'
+            slackSend message: '[LUIS GARRIDO][JOB_NAME][NAMETOOLS][Ejecución Exitosa]', teamDomain: 'luisgarrido', tokenCredentialId: 'Slack_tokens'
         }
 
         failure {
             println env.TAREA
             println NAMETOOLS
-            slackSend message: '[LUIS GARRIDO][env.JOB_NAME]${NAMETOOLS}[Ejecución fallida en][env.TAREA]', teamDomain: 'luisgarrido', tokenCredentialId: 'Slack_tokens'
+            slackSend message: '[LUIS GARRIDO][env.JOB_NAME] [NAMETOOLS] [Ejecución fallida en][env.TAREA]', teamDomain: 'luisgarrido', tokenCredentialId: 'Slack_tokens'
 
         }
     }
