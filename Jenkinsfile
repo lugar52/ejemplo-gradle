@@ -23,13 +23,22 @@ pipeline
         }
     }
     post {
+
+
         success {
-                println "Este es el mensaje " + env.SUMMARY
+                    script {
                 env.SUMMARY = "'[Luis Garrido] ${env.JOB_NAME} [${params.herramientas}] [Ejecucion exitosa]'"
+        }
+                println "Este es el mensaje " + env.SUMMARY
+                
                 slackSend(teamDomain: 'luisgarrido', tokenCredentialId: 'Slack_tokens', message: env.SUMMARY)
         }
 
         failure {
+                    script {
+                env.SUMMARY = "'[Luis Garrido] ${env.JOB_NAME} [${params.herramientas}] [Ejecucion exitosa]'"
+        }
+
                 println env.TAREA
                 println "Este es el mensaje " + env.SUMMARY
                 env.SUMMARY = "'[Luis Garrido] ${env.JOB_NAME} [${params.herramientas}] 'Ejecución fallida en stage' [${env.TAREA}]'"
