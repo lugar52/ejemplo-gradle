@@ -15,7 +15,7 @@ pipeline
                 {
                     println 'Herramientas de ejecucion seleccionadas: ' + params.herramientas
                     //def NAMETOOLS = params.herramientas
-                    def env.SUMMARY = "${NAMETOOLS}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
+                    env.SUMMARY = "${NAMETOOLS}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
 
                     def pipe = load "${params.herramientas}.groovy"
                     pipe.call()
