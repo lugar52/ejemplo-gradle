@@ -32,8 +32,8 @@ pipeline
     post {
         success {
             println "Este es el mensaje " + env.TAREA +  ' ' + env.JOB_NAME
-            slackSend(teamDomain: 'luisgarrido', tokenCredentialId: 'Slack_tokens', message: summary)
-            // slackSend message: '[LUIS GARRIDO][env.JOB_NAME][NAMETOOLS: NAMETOOLS][Ejecucion Exitosa]', teamDomain: 'luisgarrido', tokenCredentialId: 'Slack_tokens'
+            //slackSend(teamDomain: 'luisgarrido', tokenCredentialId: 'Slack_tokens', message: summary)
+            slackSend message: '[LUIS GARRIDO][JOB_NAME: ' + env.JOB_NAME + '][Ejecucion Exitosa]', teamDomain: 'luisgarrido', tokenCredentialId: 'Slack_tokens'
         }
 
         failure {
