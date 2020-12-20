@@ -30,15 +30,19 @@ def call(){
 
         post {
                 success {
+                        script {
+                                env.SUMMARY = "'[Luis Garrido] ${env.JOB_NAME} [${params.herramientas}] Ejecucion exitosa'"
+                        }
                         println "Este es el mensaje " + env.SUMMARY
-                        env.SUMMARY = "${env.SUMMARY} Ejecucion exitosa'"
                         slackSend(teamDomain: 'luisgarrido', tokenCredentialId: 'Slack_tokens', message: env.SUMMARY)
                 }
 
                 failure {
+                        script {
+                                env.SUMMARY = "'[Luis Garrido] ${env.JOB_NAME} [${params.herramientas}] 'Ejecucion fallida en stage' [${env.TAREA}]'"
+                        }
                         println env.TAREA
                         println "Este es el mensaje " + env.SUMMARY
-                        env.SUMMARY = "${env.SUMMARY} Ejecución fallida en stage [${env.TAREA}] '"
                         slackSend(teamDomain: 'luisgarrido', tokenCredentialId: 'Slack_tokens', message: env.SUMMARY)
                 }
 
