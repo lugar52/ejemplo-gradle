@@ -24,19 +24,19 @@ pipeline
     }
     post {
         success {
-            println "Este es el mensaje " + env.SUMMARY
-            // def firstname = "Homer"
-            // map."Simpson-${firstname}" = "Homer Simpson"
+                println "Este es el mensaje " + env.SUMMARY
+                // def firstname = "Homer"
+                // map."Simpson-${firstname}" = "Homer Simpson"
 
-            env.SUMMARY = "${env.SUMMARY} 'Ejecucion exitosa'"
-            slackSend(teamDomain: 'luisgarrido', tokenCredentialId: 'Slack_tokens', message: env.SUMMARY)
+                env.message = "${env.SUMMARY} 'Ejecucion exitosa'"
+                slackSend(teamDomain: 'luisgarrido', tokenCredentialId: 'Slack_tokens', message: env.message)
         }
 
         failure {
-            println env.TAREA
-            println "Este es el mensaje " + env.SUMMARY
-            env.SUMMARY = "${env.SUMMARY} 'Ejecución fallida en stage' [${env.TAREA}]"
-            slackSend(teamDomain: 'luisgarrido', tokenCredentialId: 'Slack_tokens', message: env.SUMMARY)
+                println env.TAREA
+                println "Este es el mensaje " + env.SUMMARY
+                env.message = "${env.SUMMARY} 'Ejecución fallida en stage' [${env.TAREA}]"
+                slackSend(teamDomain: 'luisgarrido', tokenCredentialId: 'Slack_tokens', message: env.message)
         }
     }
 }
