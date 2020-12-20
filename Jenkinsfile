@@ -38,7 +38,7 @@ pipeline
 
         failure {
             println env.TAREA
-            println NAMETOOLS
+            //println NAMETOOLS
             slackSend message: '[LUIS GARRIDO][env.JOB_NAME] [NAMETOOLS] [Ejecución fallida en][env.TAREA]', teamDomain: 'luisgarrido', tokenCredentialId: 'Slack_tokens'
 
         }
