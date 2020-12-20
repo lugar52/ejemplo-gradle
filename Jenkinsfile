@@ -4,7 +4,7 @@ pipeline
 
     parameters { choice(name: 'herramientas', choices: ['gradle', 'maven'], description: '') }
     
-    NAMETOOLS = params.herramientas
+    
     stages 
     {
         stage('Pipeline')
@@ -14,6 +14,7 @@ pipeline
                 script 
                 {
                     println 'Herramientas de ejecucion seleccionadas: ' + params.herramientas
+                    def NAMETOOLS = params.herramientas
                     def pipe = load "${params.herramientas}.groovy"
                     pipe.call()
                 }
