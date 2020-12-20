@@ -15,13 +15,7 @@ pipeline
                 {
                     println 'Herramientas de ejecucion seleccionadas: ' + params.herramientas
                     def NAMETOOLS = params.herramientas
-                    buildStatus =  buildStatus ?: 'SUCCESSFUL'
 
-                    // Default values
-                    def colorName = 'RED'
-                    def colorCode = '#FF0000'
-                    def subject = "${buildStatus}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
-                    def summary = "${subject} (${env.BUILD_URL})"
 
                     def pipe = load "${params.herramientas}.groovy"
                     pipe.call()
@@ -32,8 +26,14 @@ pipeline
     post {
         success {
             println "Este es el mensaje " + env.TAREA +  ' ' + env.JOB_NAME
-            //slackSend(teamDomain: 'luisgarrido', tokenCredentialId: 'Slack_tokens', message: summary)
-            slackSend message: '[LUIS GARRIDO][JOB_NAME: ' + env.JOB_NAME + '][Ejecucion Exitosa]', teamDomain: 'luisgarrido', tokenCredentialId: 'Slack_tokens'
+
+                    
+
+                    // Default values
+            def subject = "${NAMETOOLS}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
+            
+            slackSend(teamDomain: 'luisgarrido', tokenCredentialId: 'Slack_tokens', message: summary)
+            //slackSend message: '[LUIS GARRIDO][' ${env.JOB_NAME}  '][Ejecucion Exitosa]', teamDomain: 'luisgarrido', tokenCredentialId: 'Slack_tokens'
         }
 
         failure {
