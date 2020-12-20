@@ -15,14 +15,13 @@ pipeline
                 {
                     println 'Herramientas de ejecucion seleccionadas: ' + params.herramientas
                     def NAMETOOLS = params.herramientas
-                    def attachments = [
-                        [
-                            text: 'I find your lack of faith disturbing!',
-                            fallback: 'Hey, Vader seems to be mad at you.',
-                            color: '#ff0000'
-                        ]
-                    ]
+                    buildStatus =  buildStatus ?: 'SUCCESSFUL'
 
+                    // Default values
+                    def colorName = 'RED'
+                    def colorCode = '#FF0000'
+                    def subject = "${buildStatus}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
+                    def summary = "${subject} (${env.BUILD_URL})"
 
                     def pipe = load "${params.herramientas}.groovy"
                     pipe.call()
@@ -33,7 +32,7 @@ pipeline
     post {
         success {
             println "Este es el mensaje " + env.TAREA +  ' ' + env.JOB_NAME
-            slackSend(teamDomain: 'luisgarrido', tokenCredentialId: 'Slack_tokens', [env.JOB_NAME])
+            slackSend(teamDomain: 'luisgarrido', tokenCredentialId: 'Slack_tokens', message: summary)
             // slackSend message: '[LUIS GARRIDO][env.JOB_NAME][NAMETOOLS: NAMETOOLS][Ejecucion Exitosa]', teamDomain: 'luisgarrido', tokenCredentialId: 'Slack_tokens'
         }
 
