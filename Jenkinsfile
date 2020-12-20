@@ -25,16 +25,15 @@ pipeline
     post {
         success {
                 println "Este es el mensaje " + env.SUMMARY
-
-                def message = "${env.SUMMARY} 'Ejecucion exitosa'"
-                slackSend(teamDomain: 'luisgarrido', tokenCredentialId: 'Slack_tokens', message: message)
+                env.MESSAGE = "${env.SUMMARY} 'Ejecucion exitosa'"
+                slackSend(teamDomain: 'luisgarrido', tokenCredentialId: 'Slack_tokens', message: env.MESSAGE)
         }
 
         failure {
                 println env.TAREA
                 println "Este es el mensaje " + env.SUMMARY
-                def message = "${env.SUMMARY} 'Ejecución fallida en stage' [${env.TAREA}]"
-                slackSend(teamDomain: 'luisgarrido', tokenCredentialId: 'Slack_tokens', message: message)
+                env.MESSAGE = "${env.SUMMARY} 'Ejecución fallida en stage' [${env.TAREA}]"
+                slackSend(teamDomain: 'luisgarrido', tokenCredentialId: 'Slack_tokens', message: env.MESSAGE)
         }
     }
 }
