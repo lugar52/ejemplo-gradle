@@ -63,7 +63,7 @@ def call(){
                         println "Este es el mensaje " + env.SUMMARY
                         slackSend(teamDomain: 'luisgarrido', tokenCredentialId: 'Slack_tokens', message: env.SUMMARY)
                 }
-
+        }
 }
 
 return this;
