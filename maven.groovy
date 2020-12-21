@@ -49,8 +49,7 @@ def call(){
         post {
                 success {
                         script {
-                                env.ACENTO = ó
-                                env.SUMMARY = "'[Luis Garrido] [${env.JOB_NAME}] [${params.herramientas}] 'Ejecuci' ${env.ACENTO} exitosa'"
+                                env.SUMMARY = "'[Luis Garrido] [${env.JOB_NAME}] [${params.herramientas}] 'Ejecuci\u00e1!\n exitosa'"
                         }
                         println "Este es el mensaje " + env.SUMMARY
                         slackSend(teamDomain: 'luisgarrido', tokenCredentialId: 'Slack_tokens', message: env.SUMMARY)
@@ -58,8 +57,7 @@ def call(){
 
                 failure {
                         script {
-                                env.ACENTO = ó
-                                env.SUMMARY = "'[Luis Garrido] [${env.JOB_NAME}] [${params.herramientas}] 'Ejecuci' ${env.ACENTO} 'fallida en stage' [${env.TAREA}]'"
+                                env.SUMMARY = "'[Luis Garrido] [${env.JOB_NAME}] [${params.herramientas}] 'Ejecuci\u00e1!\n fallida en stage' [${env.TAREA}]'"
                         }
                         println env.TAREA
                         println "Este es el mensaje " + env.SUMMARY
