@@ -57,7 +57,7 @@ def call(){
 
                 failure {
                         script {
-                                env.SUMMARY = "'[Luis Garrido] [${env.JOB_NAME}] [${params.herramientas}] 'Ejecuci\u00e1\ n fallida en stage' [${env.TAREA}]'"
+                                env.SUMMARY = "'[Luis Garrido] [${env.JOB_NAME}] [${params.herramientas}] 'Ejecuci\u00e1• n fallida en stage' [${env.TAREA}]'"
                         }
                         println env.TAREA
                         println "Este es el mensaje " + env.SUMMARY
