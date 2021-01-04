@@ -7,8 +7,11 @@ pipeline {
         stage('Pipeline'){
             steps {
                 script {
+                    println 'Herramientas de ejecucion seleccionadas: ' + params.herramientas
+                    //env.SUMMARY = "'[Luis Garrido] ${env.JOB_NAME} [${params.herramientas}] [Ejecucion exitosa]'"
 
-                    def ejecucion = (params.herramientas == 'gradle') ? load 'gradle.groovy' : load 'maven.groovy'
+                    def pipe = load "${params.herramientas}.groovy"
+                    pipe.call()
 
                 }
             }
