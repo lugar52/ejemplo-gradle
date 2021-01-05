@@ -32,9 +32,9 @@ def call(){
                         env.TAREA = env.STAGE_NAME
                 }
 
-                withSonarQubeEnv(installationName: 'Sonar') 
+                withSonarQubeEnv(installationName: 'Sonar-Server') 
                 { // You can override the credential to be used
-                bat 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar'
+                bat './mvnw.cmd org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar'
                 }
         }
         stage('uploadNexus'){
